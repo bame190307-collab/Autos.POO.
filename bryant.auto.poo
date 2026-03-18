@@ -1,0 +1,69 @@
+const autoPrincipal = {
+    marca: "Toyota",
+    modelo: "Corolla",
+    ruedas: 4,
+    arrancar() {
+        alert(this.marca + " arrancó");
+    },
+    frenar() {
+        alert(this.marca + " frenó");
+    }
+};
+
+autoPrincipal.marca = "Honda";
+
+
+function Auto(marca, modelo, ruedas, year) {
+    this.marca = marca;
+    this.modelo = modelo;
+    this.ruedas = ruedas;
+    this.year = year;
+
+    this.arrancar = function () {
+        alert(this.marca + " arrancó");
+    };
+
+    this.frenar = function () {
+        alert(this.marca + " frenó");
+    };
+}
+
+const auto1 = new Auto("Toyota", "Corolla", 4, 2020);
+const auto2 = new Auto("Honda", "Civic", 4, 2022);
+const auto3 = new Auto("Ford", "Mustang", 4, 2023);
+
+const autos = [auto1, auto2, auto3];
+
+
+let opcion;
+
+do {
+    opcion = prompt(
+        "MENÚ DE AUTOS\n" +
+        "1. Ver autos\n" +
+        "2. Arrancar auto 1\n" +
+        "3. Frenar auto 2\n" +
+        "4. Modificar marca del auto principal\n" +
+        "5. Salir"
+    );
+
+    if (opcion == "1") {
+        console.log(autos);
+        alert("Revisa la consola para ver los autos");
+    }
+
+    if (opcion == "2") {
+        auto1.arrancar();
+    }
+
+    if (opcion == "3") {
+        auto2.frenar();
+    }
+
+    if (opcion == "4") {
+        let nuevaMarca = prompt("Nueva marca:");
+        autoPrincipal.marca = nuevaMarca;
+        alert("Marca cambiada a " + autoPrincipal.marca);
+    }
+
+} while (opcion != "5");
