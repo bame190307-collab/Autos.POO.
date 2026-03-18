@@ -3,14 +3,18 @@ const autoPrincipal = {
     modelo: "Corolla",
     ruedas: 4,
     arrancar() {
-        alert(this.marca + " arrancó");
+        console.log(this.marca + " arrancó");
     },
     frenar() {
-        alert(this.marca + " frenó");
+        console.log(this.marca + " frenó");
     }
 };
 
-autoPrincipal.marca = "Honda";
+console.log(autoPrincipal);
+
+autoPrincipal.marca = "Mazda";
+
+console.log(autoPrincipal);
 
 
 function Auto(marca, modelo, ruedas, year) {
@@ -20,18 +24,22 @@ function Auto(marca, modelo, ruedas, year) {
     this.year = year;
 
     this.arrancar = function () {
-        alert(this.marca + " arrancó");
+        console.log(this.marca + " arrancó");
     };
 
     this.frenar = function () {
-        alert(this.marca + " frenó");
+        console.log(this.marca + " frenó");
     };
 }
 
-const auto1 = new Auto("Toyota", "Corolla", 4, 2020);
-const auto2 = new Auto("Honda", "Civic", 4, 2022);
-const auto3 = new Auto("Ford", "Mustang", 4, 2023);
 
+// Creación de objetos con new
+const auto1 = new Auto("Toyota", "Corolla", 4, 2020);
+const auto2 = new Auto("Mazda", "3", 4, 2021);
+const auto3 = new Auto("Honda", "Civic", 4, 2022);
+
+
+// 🔹 Aquí se guardan en el arreglo llamado autos
 const autos = [auto1, auto2, auto3];
 
 
@@ -40,30 +48,63 @@ let opcion;
 do {
     opcion = prompt(
         "MENÚ DE AUTOS\n" +
-        "1. Ver autos\n" +
-        "2. Arrancar auto 1\n" +
-        "3. Frenar auto 2\n" +
-        "4. Modificar marca del auto principal\n" +
-        "5. Salir"
+        "1. Ver marcas de autos\n" +
+        "2. Arrancar un auto\n" +
+        "3. Frenar un auto\n" +
+        "4. Modificar marca de un auto\n" +
+        "5. Usar auto principal\n" +
+        "6. Salir"
     );
 
     if (opcion == "1") {
-        console.log(autos);
-        alert("Revisa la consola para ver los autos");
+        let lista = "Autos disponibles:\n";
+
+        for (let i = 0; i < autos.length; i++) {
+            lista += (i + 1) + ". " + autos[i].marca + "\n";
+        }
+
+        alert(lista);
     }
 
     if (opcion == "2") {
-        auto1.arrancar();
+        let num = prompt("¿Qué auto quieres arrancar? (1, 2 o 3)");
+        autos[num - 1].arrancar();
+        alert("Revisa la consola");
     }
 
     if (opcion == "3") {
-        auto2.frenar();
+        let num = prompt("¿Qué auto quieres frenar? (1, 2 o 3)");
+        autos[num - 1].frenar();
+        alert("Revisa la consola");
     }
 
     if (opcion == "4") {
+        let num = prompt("¿Qué auto quieres modificar? (1, 2 o 3)");
         let nuevaMarca = prompt("Nueva marca:");
-        autoPrincipal.marca = nuevaMarca;
-        alert("Marca cambiada a " + autoPrincipal.marca);
+        autos[num - 1].marca = nuevaMarca;
+        alert("Marca actualizada");
     }
 
-} while (opcion != "5");
+    if (opcion == "5") {
+        let opcionPrincipal = prompt(
+            "AUTO PRINCIPAL\n" +
+            "1. Arrancar\n" +
+            "2. Frenar"
+        );
+
+        if (opcionPrincipal == "1") {
+            autoPrincipal.arrancar();
+            alert("Revisa la consola");
+        }
+
+        if (opcionPrincipal == "2") {
+            autoPrincipal.frenar();
+            alert("Revisa la consola");
+        }
+    }
+
+} while (opcion != "6");
+
+
+// 🔹 Mostrar el arreglo completo en consola
+console.log(autos);
